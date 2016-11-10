@@ -63,7 +63,8 @@ public class Consultas {
         modelo.addColumn("Modelo");
         
         
-        String sql = "select Pedido.idPedido, Pedido.proveedora, Pedido.fecha, Modelo.modelo from Pedido, DetallePedido, Vehiculo, Modelo where Pedido.idPedido = DetallePedido.Pedido and DetallePedido.Vehiculo = Vehiculo.nroMotor and Modelo.idModelo = Vehiculo.modelo";
+        String sql = "select Pedido.idPedido, Proveedor.Nombre , Pedido.fecha, Modelo.modelo from Pedido, DetallePedido, Vehiculo, Modelo, Proveedor where Pedido.idPedido = DetallePedido.Pedido and DetallePedido.Vehiculo = Vehiculo.nroMotor and Modelo.idModelo = Vehiculo.modelo and Proveedor.idProveedor = Pedido.proveedora";
+              
         String datos[] = new String [4];
         Statement st;
         try{
@@ -130,6 +131,27 @@ public class Consultas {
     }
     
     
+    
+    public ArrayList Herramientas(){
+        
+        
+        ArrayList<String> Herramienta;
+        Herramienta = new ArrayList();
+        try {
+            PreparedStatement Herramientas = cn.prepareStatement("SELECT Herramienta FROM Herramienta");
+            ResultSet deps = Herramientas.executeQuery();
+            while (deps.next()) {
+                Herramienta.add(deps.getString("Herramienta"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Herramienta;
+        
+        
+       
+    }
     
     
     

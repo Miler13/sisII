@@ -14,8 +14,10 @@ public class Herramientas extends javax.swing.JPanel {
     /**
      * Creates new form Herramientas
      */
-    public Herramientas() {
+    public Herramientas(Consultas Consultas) {
         initComponents();
+        jList1.setListData(Consultas.Herramientas().toArray());
+        
     }
 
     /**
@@ -38,6 +40,11 @@ public class Herramientas extends javax.swing.JPanel {
             String[] strings = { "Herramienta 1", "herramienta 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -65,6 +72,14 @@ public class Herramientas extends javax.swing.JPanel {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        
+// TODO add your handling code here:
+System.out.print(jList1.getSelectedValue().toString());
+
+
+    }//GEN-LAST:event_jList1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

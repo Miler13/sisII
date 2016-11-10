@@ -85,7 +85,7 @@ public class InterfazVistas extends javax.swing.JFrame {
 		
 		// ini
         faltas =new faltas();
-        Herramientas = new Herramientas();
+        Herramientas = new Herramientas(con);
         balance = new balance();
         estadoAsistencia = new PanelEstadoAsistencia(con);
         pedidos = new Pedidos(con);
