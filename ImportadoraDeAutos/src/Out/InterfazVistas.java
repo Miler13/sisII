@@ -41,7 +41,7 @@ public class InterfazVistas extends javax.swing.JFrame {
     //empiezo mi recuperacion
     void obtenerVentas (){
         
-        tablaDetalle.setModel (con.obtenerVentas());
+       // tablaDetalle.setModel (con.obtenerVentas());
         
         
     }
@@ -86,7 +86,7 @@ public class InterfazVistas extends javax.swing.JFrame {
 		// ini
         faltas =new faltas();
         Herramientas = new Herramientas(con);
-        balance = new balance();
+        balance = new balance(con);
         estadoAsistencia = new PanelEstadoAsistencia(con);
         pedidos = new Pedidos(con);
         

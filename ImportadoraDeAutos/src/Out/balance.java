@@ -18,20 +18,22 @@ import javax.swing.AbstractListModel;
 public class balance extends javax.swing.JPanel {
     
     
-    Consultas consultas = new Consultas();
+    Consultas consulta = new Consultas();
     
     /**
      * Creates new form balance
      */
-    public balance() {
+    public balance(Consultas Consultas) {
         initComponents();
         llenarListaDepartamentos();
+        consulta =Consultas;
+        
     }
     
     
     
     private void llenarListaDepartamentos() {
-        ArrayList<Departamento> departamentos = consultas.recuperarDepartamentos();
+        ArrayList<Departamento> departamentos = consulta.recuperarDepartamentos();
         
         area.setModel(new AbstractListModel() {
             @Override
@@ -121,11 +123,10 @@ public class balance extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +142,7 @@ public class balance extends javax.swing.JPanel {
     private void areaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaMouseClicked
         Departamento departamento = (Departamento)area.getSelectedValue();
         int id = departamento.getId();
-        Balance balance = consultas.retornarBalancePorIdDepartamento(id);
+        Balance balance = consulta.retornarBalancePorIdDepartamento(id);
         jTable1.setValueAt(balance.getIngreso(), 1, 0);
         jTable1.setValueAt(balance.getEgreso(), 1, 1);
         jTable1.setValueAt(balance.getDeudas(), 1, 2);
