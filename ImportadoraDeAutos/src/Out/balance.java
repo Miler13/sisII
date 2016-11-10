@@ -142,7 +142,9 @@ public class balance extends javax.swing.JPanel {
         Departamento departamento = (Departamento)area.getSelectedValue();
         int id = departamento.getId();
         Balance balance = consultas.retornarBalancePorIdDepartamento(id);
-        System.out.println(balance);
+        jTable1.setValueAt(balance.getIngreso(), 1, 0);
+        jTable1.setValueAt(balance.getEgreso(), 1, 1);
+        jTable1.setValueAt(balance.getDeudas(), 1, 2);
     }//GEN-LAST:event_areaMouseClicked
 
 
