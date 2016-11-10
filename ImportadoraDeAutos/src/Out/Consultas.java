@@ -23,76 +23,69 @@ import javax.swing.table.DefaultTableModel;
  * @author Miler
  */
 public class Consultas {
-    
-    
-  ConexionBD con = new ConexionBD();
+
+    ConexionBD con = new ConexionBD();
     Connection cn = con.conexion();
-    
-    
-    public  DefaultTableModel obtenerVentas (){
+
+    public DefaultTableModel obtenerVentas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID/ ventas");
         modelo.addColumn("Comprador");
         modelo.addColumn("Modelo de Auto");
         modelo.addColumn("Tipo de venta");
-        
-        
+
         String sql = "SELECT * FROM DetalleVenta";
-        String datos[] = new String [4];
+        String datos[] = new String[4];
         Statement st;
-        try{
-                st = cn.createStatement();
-                ResultSet rs = st.executeQuery(sql);
-                while(rs.next()){
-                    datos[0] = rs.getString(1);
-                    datos[1] = rs.getString(2);
-                    datos[2] = rs.getString(3);
-                    datos[3] = rs.getString(4);
-                    modelo.addRow(datos);
-                }
-                
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                modelo.addRow(datos);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return modelo;
-               
+
     }
-    public  DefaultTableModel  pedidos(){
+
+    public DefaultTableModel pedidos() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID/ Pedido ");
         modelo.addColumn("Proveedora");
         modelo.addColumn("Fecha");
         modelo.addColumn("Modelo");
-        
-        
-        String sql = "select Pedido.idPedido, Pedido.proveedora, Pedido.fecha, Modelo.modelo from Pedido, DetallePedido, Vehiculo, Modelo where Pedido.idPedido = DetallePedido.Pedido and DetallePedido.Vehiculo = Vehiculo.nroMotor and Modelo.idModelo = Vehiculo.modelo";
-        String datos[] = new String [4];
+
+        String sql = "select Pedido.idPedido, Proveedor.Nombre , Pedido.fecha, Modelo.modelo from Pedido, DetallePedido, Vehiculo, Modelo, Proveedor where Pedido.idPedido = DetallePedido.Pedido and DetallePedido.Vehiculo = Vehiculo.nroMotor and Modelo.idModelo = Vehiculo.modelo and Proveedor.idProveedor = Pedido.proveedora";
+
+        String datos[] = new String[4];
         Statement st;
-        try{
-                st = cn.createStatement();
-                ResultSet rs = st.executeQuery(sql);
-                while(rs.next()){
-                    datos[0] = rs.getString(1);
-                    datos[1] = rs.getString(2);
-                    datos[2] = rs.getString(3);
-                    datos[3] = rs.getString(4);
-                    modelo.addRow(datos);
-                }
-                
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                modelo.addRow(datos);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return modelo;
-               
+
     }
-    
-    
-    
-    
-    
-    public void reg(String ci,String nombre ,String apellidos ,String direccion )
-    {
-     try {
+
+    public void reg(String ci, String nombre, String apellidos, String direccion) {
+        try {
             PreparedStatement pps = cn.prepareStatement("INSERT INTO cliente (Nombre,dirección,crédito) VALUES (?,?,?)");
             pps.setString(1, ci);
             pps.setString(2, nombre);
@@ -100,19 +93,15 @@ public class Consultas {
 
             pps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Datos Guardados");
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-       
-    
-    
-    public ArrayList departementos(){
-        
-        
+
+    public ArrayList departementos() {
+
         ArrayList<String> departamento;
         departamento = new ArrayList();
         try {
@@ -126,11 +115,9 @@ public class Consultas {
             Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return departamento;
-        
-        
-       
+
     }
-    
+
     public ArrayList<Departamento> recuperarDepartamentos() {
         ArrayList<Departamento> departamentos;
         departamentos = new ArrayList();
@@ -148,6 +135,23 @@ public class Consultas {
             Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return departamentos;
+    }
+
+    public ArrayList Herramientas() {
+
+        ArrayList<String> Herramienta;
+        Herramienta = new ArrayList();
+        try {
+            PreparedStatement Herramientas = cn.prepareStatement("SELECT Herramienta FROM Herramienta");
+            ResultSet deps = Herramientas.executeQuery();
+            while (deps.next()) {
+                Herramienta.add(deps.getString("Herramienta"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Herramienta;
     }
     
     public Balance retornarBalancePorIdDepartamento(int idDepartamento){
