@@ -10,15 +10,6 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -97,15 +88,18 @@ public class InterfazVistas extends javax.swing.JFrame {
         Herramientas = new Herramientas();
         balance = new balance();
         estadoAsistencia = new PanelEstadoAsistencia(con);
+        pedidos = new Pedidos(con);
         
         //////agregando   titulos  
         
         estadoAsistencia.setBorder(javax.swing.BorderFactory.createTitledBorder("estado"));
+        pedidos.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos"));
         faltas.setBorder(javax.swing.BorderFactory.createTitledBorder("Faltas"));
         Herramientas.setBorder(javax.swing.BorderFactory.createTitledBorder("Herramientas "));
         balance.setBorder(javax.swing.BorderFactory.createTitledBorder("Balances"));
         
      /////agregar   Jpanel    
+     jTabbedPane1.addTab("pedidos", pedidos);
      jTabbedPane1.addTab("EstadoAsistencia", estadoAsistencia);
      jTabbedPane1.addTab("Faltas", faltas);
      jTabbedPane1.addTab("Herramientas",Herramientas);
@@ -488,6 +482,7 @@ public class InterfazVistas extends javax.swing.JFrame {
     private javax.swing.JPanel Herramientas;
     private javax.swing.JPanel balance;
     private javax.swing.JPanel estadoAsistencia;
+    private javax.swing.JPanel pedidos;
     
     // End of variables declaration//GEN-END:variables
 }

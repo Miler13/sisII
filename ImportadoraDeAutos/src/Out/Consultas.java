@@ -55,6 +55,34 @@ public class Consultas {
         return modelo;
                
     }
+    public  DefaultTableModel  pedidos(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID/ Pedido ");
+        modelo.addColumn("Proveedora");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Modelo");
+        
+        
+        String sql = "select Pedido.idPedido, Pedido.proveedora, Pedido.fecha, Modelo.modelo from Pedido, DetallePedido, Vehiculo, Modelo where Pedido.idPedido = DetallePedido.Pedido and DetallePedido.Vehiculo = Vehiculo.nroMotor and Modelo.idModelo = Vehiculo.modelo";
+        String datos[] = new String [4];
+        Statement st;
+        try{
+                st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while(rs.next()){
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    datos[2] = rs.getString(3);
+                    datos[3] = rs.getString(4);
+                    modelo.addRow(datos);
+                }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+               
+    }
     
     
     

@@ -14,8 +14,10 @@ public class Pedidos extends javax.swing.JPanel {
     /**
      * Creates new form Pedidos
      */
-    public Pedidos() {
+    public Pedidos(Consultas Consultas) {
         initComponents();
+       jTable1.setModel(Consultas.pedidos());
+       
     }
 
     /**
@@ -47,7 +49,7 @@ public class Pedidos extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Codigo", "Empresa", "importadora"
+                "ID Pedido", "Proveedora", "Fecha", "Modelo"
             }
         ) {
             Class[] types = new Class [] {
