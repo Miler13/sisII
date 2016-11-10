@@ -5,6 +5,8 @@
  */
 package Out;
 
+import Modelo.Balance;
+import Modelo.Departamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -129,13 +131,44 @@ public class Consultas {
        
     }
     
+    public ArrayList<Departamento> recuperarDepartamentos() {
+        ArrayList<Departamento> departamentos;
+        departamentos = new ArrayList();
+        try {
+            PreparedStatement consulta = cn.prepareStatement("SELECT * FROM Departamento");
+            ResultSet deps = consulta.executeQuery();
+            while (deps.next()) {
+                Departamento departamento = new Departamento();
+                departamento.setId(Integer.parseInt(deps.getString("ID")));
+                departamento.setDepartamento(deps.getString("Departamento"));
+                departamentos.add(departamento);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return departamentos;
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
+    public Balance retornarBalancePorIdDepartamento(int idDepartamento){
+        Balance balance = new Balance();
+        String queryTemplate = "SELECT * FROM Balance WHERE idDepartamento = %d";
+        String query = String.format(queryTemplate, idDepartamento);
+        
+        try {
+            PreparedStatement consulta = cn.prepareStatement(query);
+            ResultSet deps = consulta.executeQuery();
+            while (deps.next()) {
+                balance.setNroBalance(Integer.parseInt(deps.getString("nroBalance")));
+                balance.setIdDepartamento(Integer.parseInt(deps.getString("idDepartamento")));
+                balance.setIngreso(Long.parseLong(deps.getString("ingreso")));
+                balance.setEgreso(Long.parseLong(deps.getString("egreso")));
+                balance.setDeudas(Long.parseLong(deps.getString("deudas")));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return balance;
+    }
 }

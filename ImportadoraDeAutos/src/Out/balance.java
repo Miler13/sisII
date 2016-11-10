@@ -5,17 +5,45 @@
  */
 package Out;
 
+import Modelo.Balance;
+import Modelo.Departamento;
+import java.sql.Connection;
+import java.util.ArrayList;
+import javax.swing.AbstractListModel;
+
 /**
  *
  * @author Miler
  */
 public class balance extends javax.swing.JPanel {
-
+    
+    
+    Consultas consultas = new Consultas();
+    
     /**
      * Creates new form balance
      */
     public balance() {
         initComponents();
+        llenarListaDepartamentos();
+    }
+    
+    
+    
+    private void llenarListaDepartamentos() {
+        ArrayList<Departamento> departamentos = consultas.recuperarDepartamentos();
+        
+        area.setModel(new AbstractListModel() {
+            @Override
+            public int getSize() {
+                return departamentos.size();
+            }
+
+            @Override
+            public Object getElementAt(int index) {
+                return departamentos.get(index);
+            }
+        });
     }
 
     /**
@@ -40,6 +68,11 @@ public class balance extends javax.swing.JPanel {
             String[] strings = { "area1", "area2", "area 3", "area 4", "area 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        area.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                areaMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(area);
 
@@ -104,6 +137,13 @@ public class balance extends javax.swing.JPanel {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void areaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaMouseClicked
+        Departamento departamento = (Departamento)area.getSelectedValue();
+        int id = departamento.getId();
+        Balance balance = consultas.retornarBalancePorIdDepartamento(id);
+        System.out.println(balance);
+    }//GEN-LAST:event_areaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
