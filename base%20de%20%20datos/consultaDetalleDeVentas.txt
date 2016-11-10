@@ -1,0 +1,3 @@
+select Pedido.idPedido, Pedido.proveedora, Pedido.fecha, Modelo.modelo
+from Pedido, DetallePedido, Vehiculo, Modelo
+where Pedido.idPedido = DetallePedido.Pedido and DetallePedido.Vehiculo = Vehiculo.nroMotor and Modelo.idModelo = Vehiculo.modelo
