@@ -89,6 +89,8 @@ public class InterfazVistas extends javax.swing.JFrame {
         balance = new balance(con);
         estadoAsistencia = new PanelEstadoAsistencia(con);
         pedidos = new Pedidos(con);
+        optener = new ObtenerVentas(con);
+                
         
         //////agregando   titulos  
         
@@ -97,6 +99,7 @@ public class InterfazVistas extends javax.swing.JFrame {
         faltas.setBorder(javax.swing.BorderFactory.createTitledBorder("Faltas"));
         Herramientas.setBorder(javax.swing.BorderFactory.createTitledBorder("Herramientas "));
         balance.setBorder(javax.swing.BorderFactory.createTitledBorder("Balances"));
+        optener.setBorder(javax.swing.BorderFactory.createTitledBorder("Obtener Ventas"));
         
      /////agregar   Jpanel    
      jTabbedPane1.addTab("pedidos", pedidos);
@@ -104,6 +107,7 @@ public class InterfazVistas extends javax.swing.JFrame {
      jTabbedPane1.addTab("Faltas", faltas);
      jTabbedPane1.addTab("Herramientas",Herramientas);
      jTabbedPane1.addTab("Balance",balance);
+     jTabbedPane1.addTab("Obtener Ventas",optener);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -282,7 +286,7 @@ public class InterfazVistas extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Obtener ventas", jPanel4);
+       // jTabbedPane1.addTab("Obtener ventas", jPanel4);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -483,6 +487,7 @@ public class InterfazVistas extends javax.swing.JFrame {
     private javax.swing.JPanel balance;
     private javax.swing.JPanel estadoAsistencia;
     private javax.swing.JPanel pedidos;
+    private javax.swing.JPanel optener;
     
     // End of variables declaration//GEN-END:variables
 }

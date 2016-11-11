@@ -198,6 +198,35 @@ public class Consultas {
     }
     
     
+     public  DefaultTableModel obtenerVentas (String nroDetalle){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID/ ventas");
+        modelo.addColumn("Comprador");
+        modelo.addColumn("Modelo de Auto");
+        modelo.addColumn("Tipo de venta");
+        
+        
+        String sql = "select nroDetalle, C.ciComprador , auto, tipoVenta from DetalleVenta D , Comprador C where D.ciComprador = C.ciComprador and nroDetalle = "+nroDetalle;
+        
+        String datos[] = new String [4];
+        Statement st;
+        try{
+                st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while(rs.next()){
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    datos[2] = rs.getString(3);
+                    datos[3] = rs.getString(4);
+                    modelo.addRow(datos);
+                }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+               
+    }
     
     
 }
