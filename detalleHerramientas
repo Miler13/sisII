@@ -1,0 +1,23 @@
+public DefaultTableModel detalleHerramientas(){
+       DefaultTableModel modelo = new DefaultTableModel();
+       modelo.addColumn("Estado");
+       modelo.addColumn("Mecanico");
+       
+            String sql = "SELECT ";
+        String datos[] = new String [2];
+        Statement st;
+        try{
+                st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while(rs.next()){
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    modelo.addRow(datos);
+                }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+               
+   }
