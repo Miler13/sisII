@@ -1,0 +1,28 @@
+public  DefaultTableModel obtenerVentas (){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID/ ventas");
+        modelo.addColumn("Comprador");
+        modelo.addColumn("Modelo de Auto");
+        modelo.addColumn("Tipo de venta");
+        
+        
+        String sql = "SELECT * FROM DetalleVenta";
+        String datos[] = new String [4];
+        Statement st;
+        try{
+                st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while(rs.next()){
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    datos[2] = rs.getString(3);
+                    datos[3] = rs.getString(4);
+                    modelo.addRow(datos);
+                }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+               
+    }
