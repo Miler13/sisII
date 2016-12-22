@@ -3,27 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- package Out;
+package Out;
 
-import Out.ConexionBD;
-import Out.InterfazVistas;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Box;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,54 +29,54 @@ public class PanelEstadoAsistencia extends JPanel {
     private JTable asistenciaEmpleados;
     private JPanel filtroDepartamento;
     private JComboBox departamentosCB;
-    private ConexionBD con = new ConexionBD();
-    private Connection cn = con.conexion();
+    private final Consultas consultas;
+    private DefaultTableModel modelo;
 
-    public PanelEstadoAsistencia(Consultas  Consultas ) {
-        init(Consultas);
-        fillTable();
+    public PanelEstadoAsistencia(Consultas consultas) {
+        init(consultas);
+        initTable();
         load();
-        
+        this.consultas = consultas;
     }
 
     private void init(Consultas Consultas) {
+        setLayout(new GridLayout(3, 1));
         titulo = new JLabel("Estado De Asistencia De Empleados");
         filtroDepartamento = new JPanel(new GridLayout(1, 3));
+        filtroDepartamento.setBorder(BorderFactory.createEmptyBorder(40,40,40,40));
         departamentosCB = new JComboBox(Consultas.departementos().toArray());
+        departamentosCB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fillTable(departamentosCB.getSelectedItem().toString());
+                System.out.println(departamentosCB.getSelectedItem().toString());
+            }
+
+        });
+        filtroDepartamento.add(titulo);
         filtroDepartamento.add(departamentosCB);
     }
 
     private void load() {
-        add(Box.createRigidArea(new Dimension(200, 40)));
-        add(titulo, BorderLayout.PAGE_START);
         add(filtroDepartamento);
-        add(Box.createRigidArea(new Dimension(200, 40)));
+//        add(new RigidArea());
+//        add(filtroDepartamento, BorderLayout.PAGE_START);
         add(scroll, BorderLayout.CENTER);
+//        add(scroll, BorderLayout.CENTER);
     }
 
-    private void fillTable() {
-        String[] columnNames = {"Nombre",
-            "CI",
-            "Cargo",
-            "Estado Asistencia",};
-
-        Object[][] data = {{"Miler", "123456",
-            "Scrum Team", "Puntual"},
-        {"German", "234567",
-            "Scrum Team", "Atrasado"},
-        {"Javier", "345678",
-            "Scrum Team", "Puntual"},
-        {"Luis", "456789",
-            "Product Owner", "Atrasado"},
-        {"Miguel", "246810",
-            "Scrum Team", "Puntual"},
-        {"Rodrigo", "135790",
-            "Scrum Master", "Puntual"}};
-        asistenciaEmpleados = new JTable(data, columnNames);
+    private void fillTable(String departamento) {
+        modelo = consultas.estadoAsistencia(departamento);
+        modelo.fireTableStructureChanged();
+        asistenciaEmpleados.repaint();
+        asistenciaEmpleados.setModel(modelo);
+    }
+    
+    private void initTable() {
+        asistenciaEmpleados = new JTable(modelo);
         asistenciaEmpleados.setFillsViewportHeight(true);
         scroll = new JScrollPane(asistenciaEmpleados);
-        scroll.setPreferredSize(new Dimension(500, 150));
+        scroll.setPreferredSize(new Dimension(200, 150));
     }
 
-    
 }

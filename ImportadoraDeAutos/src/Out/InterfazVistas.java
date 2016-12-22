@@ -31,6 +31,7 @@ public class InterfazVistas extends javax.swing.JFrame {
      */
     public InterfazVistas() {
         //forma interfacez
+        super("ags");
         this.setUndecorated(true);
         initComponents();
         obtenerVentas();
@@ -84,7 +85,7 @@ public class InterfazVistas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 		
 		// ini
-        faltas =new faltas();
+        faltas =new faltas(con);
         Herramientas = new Herramientas(con);
         balance = new balance(con);
         estadoAsistencia = new PanelEstadoAsistencia(con);
