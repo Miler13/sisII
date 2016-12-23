@@ -15,10 +15,10 @@ public class Funciones {
         int res = Integer.parseInt(num);
         boolean esContado = true;
         if (esNumero(num)) {
-            if (esContado) {
-                res = (int) (res * 0.2);
-            } else {
+            if (res > 2000) {
                 res = (int) (res * 0.4);
+            } else {
+                res = (int) (res * 0.2);
             }
         } else {
             JOptionPane("Ingrese Un Numero Valido");
@@ -36,10 +36,7 @@ public class Funciones {
             return false;
         }
     }
-    /*public static void main(String args[]){
-        Funciones instance = new Funciones();
-        System.out.println(instance.Ganancia("2400"));
-    }*/
+    
 
     private void JOptionPane(String ingrese_Un_Numero_Valido) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

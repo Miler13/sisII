@@ -5,6 +5,8 @@
  */
 package Out;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author MI HP
@@ -14,14 +16,14 @@ public class tipoVentas extends javax.swing.JPanel {
     /**
      * Creates new form tipoVentas
      */
+    Funciones funcion = new Funciones();
     
-    Funciones fun;
-    public tipoVentas(Consultas Consulta,Funciones funciones) {
+    public tipoVentas(Consultas Consulta) {
         initComponents();
         
-        fun=funciones;
        tipoventa.setModel(Consulta.tipoventa ());
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,11 +38,9 @@ public class tipoVentas extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tipoventa = new javax.swing.JTable();
         ganancia = new javax.swing.JToggleButton();
-        jTextField1 = new javax.swing.JTextField();
-        contado = new javax.swing.JRadioButton();
-        credito = new javax.swing.JRadioButton();
-        jTextField2 = new javax.swing.JTextField();
+        input_precio = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        output_ganancia = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder("Ganancias por el tipo de venta realizado"));
@@ -72,43 +72,36 @@ public class tipoVentas extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        input_precio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        contado.setText("contado");
-
-        credito.setText("credito");
-        credito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creditoActionPerformed(evt);
+                input_precioActionPerformed(evt);
             }
         });
 
         jLabel1.setText("ingrese precio");
+
+        output_ganancia.setText("Ganancia");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(contado)
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(credito)
-                            .addComponent(ganancia))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(input_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addComponent(ganancia))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(output_ganancia, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -122,53 +115,33 @@ public class tipoVentas extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(input_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(contado)
-                                    .addComponent(credito))
-                                .addGap(80, 80, 80))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ganancia)))))
+                        .addGap(86, 86, 86)
+                        .addComponent(ganancia)
+                        .addGap(31, 31, 31)
+                        .addComponent(output_ganancia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+ 
     private void gananciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gananciaActionPerformed
-   // buttonGroup1.add(ganancia);
-  //  buttonGroup1.add(contado);
-        String  num =jTextField1.getText();
-        if(num!=null){
-        
-        fun.Ganancia(num);}
-    
-    
-    
-    // TODO add your handling code here:
+        int ganancia = funcion.Ganancia(input_precio.getText());
+        output_ganancia.setText(""+ganancia);
     }//GEN-LAST:event_gananciaActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void creditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_creditoActionPerformed
+    private void input_precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_precioActionPerformed
+      
+    }//GEN-LAST:event_input_precioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JRadioButton contado;
-    private javax.swing.JRadioButton credito;
     private javax.swing.JToggleButton ganancia;
+    private javax.swing.JTextField input_precio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel output_ganancia;
     private javax.swing.JTable tipoventa;
     // End of variables declaration//GEN-END:variables
 }

@@ -91,7 +91,7 @@ public class InterfazVistas extends javax.swing.JFrame {
         estadoAsistencia = new PanelEstadoAsistencia(con);
         pedidos = new Pedidos(con);
         optener = new ObtenerVentas(con);
-        tipoventa =new tipoVentas(con, fun);
+        tipoventa =new tipoVentas(con);
         nuevoEmpleado =new nuevoEmpleado(con);
                 
         
