@@ -53,6 +53,35 @@ public class Consultas {
         return modelo;
 
     }
+    
+     public  DefaultTableModel tipoventa (){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Tipo venta");
+        modelo.addColumn("precio");
+        
+        
+        
+        
+        String sql = "SELECT DetalleVenta.tipoVenta, DetalleVenta.precioBase FROM DetalleVenta";
+        
+        String datos[] = new String [2];
+        Statement st;
+        try{
+                st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while(rs.next()){
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    
+                    modelo.addRow(datos);
+                }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return modelo;
+               
+    }
 
     public DefaultTableModel estadoAsistencia(String nombreDepartamento) {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -151,6 +180,8 @@ public class Consultas {
         return departamento;
 
     }
+    
+    
     public ArrayList EmpledosporDEpartamento(String x) {
 
         ArrayList<String> departamento;
@@ -278,4 +309,56 @@ public class Consultas {
 
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void nuevoEmpleado(String ci, String departemento, String nombre, String apellidos) {
+     String ocupado ="0";
+        try {
+            PreparedStatement pps = cn.prepareStatement("INSERT INTO `sql8143375`.`Empleado` (`CIEmpleado`, `IdDepartamento`, `Nombre`, `Apellidos`, `Ocupado`) VALUES (?, ?, ?, ?,?);");
+            pps.setString(1, ci);
+            pps.setString(2, departemento);
+            pps.setString(3, nombre);
+            pps.setString(4, apellidos);
+            pps.setString(5,ocupado );
+
+            pps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Datos Guardados");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    
+     public ArrayList iddepartementos(String nombre) {
+
+        ArrayList<String> departamento;
+        departamento = new ArrayList();
+        try {
+            PreparedStatement departamentos = cn.prepareStatement("SELECT ID FROM Departamento WHERE Departamento.Departamento = '"+nombre+"'");
+            ResultSet deps = departamentos.executeQuery();
+            while (deps.next()) {
+                departamento.add(deps.getString("ID"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazVistas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return departamento;
+
+    }
+    
+    
+    
 }

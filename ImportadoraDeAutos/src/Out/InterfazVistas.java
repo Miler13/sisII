@@ -24,7 +24,7 @@ public class InterfazVistas extends javax.swing.JFrame {
     
     
     Consultas con= new Consultas();
-    
+    Funciones fun=new Funciones();
     
     /**
      * Creates new form InterfazVistas
@@ -91,6 +91,8 @@ public class InterfazVistas extends javax.swing.JFrame {
         estadoAsistencia = new PanelEstadoAsistencia(con);
         pedidos = new Pedidos(con);
         optener = new ObtenerVentas(con);
+        tipoventa =new tipoVentas(con, fun);
+        nuevoEmpleado =new nuevoEmpleado(con);
                 
         
         //////agregando   titulos  
@@ -101,6 +103,8 @@ public class InterfazVistas extends javax.swing.JFrame {
         Herramientas.setBorder(javax.swing.BorderFactory.createTitledBorder("Herramientas "));
         balance.setBorder(javax.swing.BorderFactory.createTitledBorder("Balances"));
         optener.setBorder(javax.swing.BorderFactory.createTitledBorder("Obtener Ventas"));
+        tipoventa.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Ventas"));
+        nuevoEmpleado.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo  Empleado"));
         
      /////agregar   Jpanel    
      jTabbedPane1.addTab("pedidos", pedidos);
@@ -109,6 +113,8 @@ public class InterfazVistas extends javax.swing.JFrame {
      jTabbedPane1.addTab("Herramientas",Herramientas);
      jTabbedPane1.addTab("Balance",balance);
      jTabbedPane1.addTab("Obtener Ventas",optener);
+     jTabbedPane1.addTab("Tipo Ventas",tipoventa);
+     jTabbedPane1.addTab("Nuevo Empleado",nuevoEmpleado);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,7 +214,7 @@ public class InterfazVistas extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Registrar ventas", jPanel2);
+      //  jTabbedPane1.addTab("Registrar ventas", jPanel2);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de ventas para el contrato "));
@@ -489,6 +495,8 @@ public class InterfazVistas extends javax.swing.JFrame {
     private javax.swing.JPanel estadoAsistencia;
     private javax.swing.JPanel pedidos;
     private javax.swing.JPanel optener;
+    private javax.swing.JPanel tipoventa;
+    private javax.swing.JPanel nuevoEmpleado;
     
     // End of variables declaration//GEN-END:variables
 }

@@ -45,7 +45,7 @@ public class faltas extends javax.swing.JPanel {
         jComboBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fillTable(jComboBox1.getSelectedItem().toString());
+             fillTable(jComboBox1.getSelectedItem().toString());
                 System.out.println(jComboBox1.getSelectedItem().toString());
             }
 
